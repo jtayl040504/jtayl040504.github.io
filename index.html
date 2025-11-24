@@ -3,14 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+        <link rel="stylesheet" href="styles.css">
         <title>Joshua Home Page</title>
     </head>
-      <body onload="welcomeUser()">
+      <body onload="welcomeUser(), toggleFeaturedContent()">
         <H1>Welcome to My Page</H1>
-        <h2>Click below:</h2>
-        <!--<button onclick="welcomeUser()">Click Me</button> -->
-        
+        <!--Dark mode button-->
+        <button id="darkModeBtn">Dark Mode</button>
+
+        <h2>Click below:</h2>        
         <!--Navigation menu-->
         <nav>
           <ul>
@@ -22,13 +23,35 @@
 
         <!--About-->
         <section id="about">
-        <h2>About</h2>
-        <h3>This is the About section.</h3>
-        <p>Hello, My name is Josua Taylor. Sometimes Josh for short.  I am 21 years old. I am
-          the youngest of 5 siblings. I am from Aliceville, Alabama.
-          I am currently attending ECPI pursuing a degree in Software Development. I am still
-          fairly new to coding but I am excited to learn more and improve my skills.
-        </p>
+          <h2>About</h2>
+          <h3>This is the About section.</h3>
+          <p>Hello, My name is Joshua Taylor. Sometimes Josh for short.  I am 21 years old. I am
+            the youngest of 5 siblings. I am from Aliceville, Alabama.
+            I am currently attending ECPI pursuing a degree in Software Development. I am still
+            fairly new to coding but I am excited to learn more and improve my skills.
+          </p>
+          <div id="skills-list"></div>
+        </section>
+
+        <!--Featured Content-->
+        <section id ="featured-content">
+          <h2>Featured Content</h2>
+          <p>This is the Featured Content section.</p>
+          <!--Div for University Resources-->
+          <div>
+            <h3>University Resources:</h3>
+            <a href="https://www.ecpi.edu/">ECPI University Website</a> <br>
+            <a href="https://ecpi.instructure.com/">ECPI Canvas</a> <br>
+            <a href="https://library.ecpi.edu/">ECPI Library</a> <br>
+            <a href="https://www.ecpi.edu/about-ecpi/contact-us">Contact ECPI</a>
+          </div>
+          <!--Div for Personal Projects-->
+          <div>
+            <h3>Personal Projects:</h3>
+            <a href="">Personal Project 1 placeholder</a> <br>
+            <a href="">Personal Project 2 placeholder</a> <br>
+            <a href="">Personal Project 3 placeholder</a>
+          </div>
         </section>
 
         <section id="projects">
@@ -37,7 +60,8 @@
         <p>This is the Projects section.</p>
         <a href="">Project 1 placeholder</a> <br>
         <a href="">Project 2 placeholder</a> <br>
-        <a href="">Project 3 placeholder</a>
+        <a href="">Project 2 placeholder</a> <br>
+        <a href="">Project 4 placeholder</a>
         </section>
 
         <!--Contacts-->
@@ -76,6 +100,51 @@
               alert("Hello, " + user);
             }
           }
+          // Array of skills
+          const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+          // Display skills in the skills-list div
+          const skillsListDiv = document.getElementById("skills-list");
+          const skillsHeading = document.createElement("h3");
+          skillsHeading.textContent = "My Skills:";
+          skillsListDiv.appendChild(skillsHeading);
+          const skillsUl = document.createElement("ul");
+          skills.forEach(function(skill) {
+            const skillLi = document.createElement("li");
+            skillLi.textContent = skill;
+            skillsUl.appendChild(skillLi);
+          });
+          skillsListDiv.appendChild(skillsUl);
+
+          //Dark mode toggle
+          document.getElementById("darkModeBtn").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+
+          // Update button text
+          if (document.body.classList.contains("dark-mode")) {
+              this.textContent = "Light Mode";
+          } else {
+            this.textContent = "Dark Mode";
+          }
+          });
+          // function to hide/show featured content
+          function toggleFeaturedContent() {
+            const featuredContent = document.getElementById("featured-content");
+            const linkProjects = document.getElementById("projects");
+
+            const linkCount = linkProjects.querySelectorAll("a").length;
+            if (linkCount > 3) {
+              featuredContent.classList.add("hidden");
+            } else {
+              featuredContent.classList.remove("hidden");
+            } 
+          }
+          
+          //interactivity for contact form submit button
+          document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            // Thank you alert with user input from the form
+            const name = document.getElementById("name").value;
+            alert("Thank you for reaching out, " + name + "! I will get back to you soon.");});
         </script>
       </body>
 </html>

@@ -1,0 +1,39 @@
+/* Button placement */
+#darkModeBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #333;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect */
+#darkModeBtn:hover {
+    background-color: #555;
+    transform: scale(1.08);
+}
+
+/* Dark mode body styles */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button appearance when dark mode is on */
+.dark-mode #darkModeBtn {
+    background-color: #ddd;
+    color: black;
+}
+
+.dark-mode #darkModeBtn:hover {
+    background-color: #fff;
+}
+.hidden {
+    display: none;
+}
