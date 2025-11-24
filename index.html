@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="styles.css">
         <title>Joshua Home Page</title>
     </head>
-      <body onload="welcomeUser(), toggleFeaturedContent()">
+      <body onload="welcomeUser()">
         <H1>Welcome to My Page</H1>
         <!--Dark mode button-->
         <button id="darkModeBtn">Dark Mode</button>
@@ -120,7 +120,7 @@
               featuredContent.classList.remove("hidden");
             } 
           }
-          
+          toggleFeaturedContent();
           //interactivity for contact form submit button
           document.querySelector("form").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
