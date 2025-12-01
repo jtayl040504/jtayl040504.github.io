@@ -1,132 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Joshua Home Page</title>
-    </head>
-      <body onload="welcomeUser()">
-        <H1>Welcome to My Page</H1>
-        <!--Dark mode button-->
-        <button id="darkModeBtn">Dark Mode</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Joshua Home Page</title>
+</head>
+<body>
+    <h1>Welcome to My Page</h1>
+    <button id="darkModeBtn">Dark Mode</button>
 
-        <h2>Click below:</h2>        
-        <!--Navigation menu-->
-        <nav>
-          <ul>
+    <h2>Click below:</h2>
+    <nav>
+        <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+        </ul>
+    </nav>
 
-        <!--About-->
-        <section id="about">
+    <section id="about">
         <h2>About</h2>
         <h3>This is the About section.</h3>
-        <p>Hello, My name is Joshua Taylor. Sometimes Josh for short.  I am 21 years old. I am
-          the youngest of 5 siblings. I am from Aliceville, Alabama.
-          I am currently attending ECPI pursuing a degree in Software Development. I am still
-          fairly new to coding but I am excited to learn more and improve my skills.
+        <p>Hello, My name is Joshua Taylor. Sometimes Josh for short. I am 21 years old. I am
+            the youngest of 5 siblings. I am from Aliceville, Alabama.
+            I am currently attending ECPI pursuing a degree in Software Development. I am still
+            fairly new to coding but I am excited to learn more and improve my skills.
         </p>
         <div id="skills-section">
-          <ul id="skills-list"></ul>
+            <ul id="skills-list"></ul>
         </div>
+    </section>
 
-        </section>
-
-        <section id="projects">
+    <section id="projects">
         <h2>Projects</h2>
-        <!--Projects-->
         <p>This is the Projects section.</p>
-        <a href="">Project 1 placeholder</a> <br>
-        <a href="">Project 2 placeholder</a> <br>
-        <a href="">Project 2 placeholder</a> <br>
+        <a href="">Project 1 placeholder</a><br>
+        <a href="">Project 2 placeholder</a><br>
+        <a href="">Project 3 placeholder</a><br>
         <a href="">Project 4 placeholder</a>
-        </section>
+    </section>
 
-        <!--Contacts-->
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>This is the Contact section.</p>
-          <form>
-            <!-- Form for out contact-->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>This is the Contact section.</p>
+        <form>
             <fieldset id="contactinfo">
-                    <label for="email">
-                    Email Address
+                <label for="email">Email Address
                     <input type="text" id="email" />
-                    </label> <br>
-                    <label for="name">
-                    Name
+                </label><br>
+                <label for="name">Name
                     <input type="text" id="name" />
-                    </label> <br>
-                    <label for="subject">
-                    Subject
+                </label><br>
+                <label for="subject">Subject
                     <input type="text" id="subject" />
-                    </label> <br>
-                    <label for="message">
-                    Message
+                </label><br>
+                <label for="message">Message
                     <input type="text" id="message" />
-                    </label>
+                </label>
             </fieldset>
-            <button>Submit</button>
-          </form>     
-        </section>
 
-        <script>
-          //Function to prompt user to enter their name
-          function welcomeUser() {
-          let user = prompt("Please enter your name.","John Doe");
-            if (user != null){
-              alert("Hello, " + user);
+            <!-- Status Message Placeholder -->
+            <div id="form-status"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <script>
+        // Welcome message (only shows once)
+        function welcomeUser() {
+            if (!localStorage.getItem("welcomed")) {
+                let user = prompt("Please enter your name.", "John Doe");
+                if (user != null) {
+                    alert("Hello, " + user);
+                }
+                localStorage.setItem("welcomed", "true");
             }
-          }
-          // Array of skills
-          const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
-          // Display skills in the skills-list div
-          const skillsListDiv = document.getElementById("skills-list");
-          const skillsHeading = document.createElement("h3");
-          skillsHeading.textContent = "My Skills:";
-          skillsListDiv.appendChild(skillsHeading);
-          const skillsUl = document.createElement("ul");
-          skills.forEach(function(skill) {
+            setTimeout(() => {
+                alert("Welcome to my page!");
+            }, 2000);
+        }
+
+        window.addEventListener("DOMContentLoaded", welcomeUser);
+
+        // Skills section
+        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+        const skillsListDiv = document.getElementById("skills-list");
+        const skillsHeading = document.createElement("h3");
+        skillsHeading.textContent = "My Skills:";
+        skillsListDiv.appendChild(skillsHeading);
+        const skillsUl = document.createElement("ul");
+        skills.forEach(skill => {
             const skillLi = document.createElement("li");
             skillLi.textContent = skill;
             skillsUl.appendChild(skillLi);
-          });
-          skillsListDiv.appendChild(skillsUl);
+        });
+        skillsListDiv.appendChild(skillsUl);
 
-          //Dark mode toggle
-          document.getElementById("darkModeBtn").addEventListener("click", function() {
+        // Dark mode toggle
+        document.getElementById("darkModeBtn").addEventListener("click", function () {
             document.body.classList.toggle("dark-mode");
+            this.textContent = document.body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
+        });
 
-          // Update button text
-          if (document.body.classList.contains("dark-mode")) {
-              this.textContent = "Light Mode";
-          } else {
-            this.textContent = "Dark Mode";
-          }
-          });
-          // function to hide/show featured content
-          function toggleFeaturedContent() {
+        // Show/hide featured content based on project link count
+        function toggleFeaturedContent() {
             const featuredContent = document.getElementById("featured-content");
             const linkProjects = document.getElementById("projects");
+            if (!featuredContent) return;
 
             const linkCount = linkProjects.querySelectorAll("a").length;
-            if (linkCount > 3) {
-              featuredContent.classList.add("hidden");
-            } else {
-              featuredContent.classList.remove("hidden");
-            } 
-          }
-          toggleFeaturedContent();
-          //interactivity for contact form submit button
-          document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
-            // Thank you alert with user input from the form
+            featuredContent.classList.toggle("hidden", linkCount > 3);
+        }
+        toggleFeaturedContent();
+
+        // Contact form timed confirmation
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const statusDiv = document.getElementById("form-status");
             const name = document.getElementById("name").value;
-            alert("Thank you for reaching out, " + name + "! I will get back to you soon.");});
-        </script>
-      </body>
+
+            // Show loading message
+            statusDiv.textContent = "Sending message...";
+            statusDiv.style.color = "orange";
+
+            // Simulated delay
+            setTimeout(() => {
+                statusDiv.textContent = "Message sent successfully! Thank you, " + name + ". I will get back to you soon.";
+                statusDiv.style.color = "green";
+            }, 2500);
+        });
+    </script>
+</body>
 </html>
