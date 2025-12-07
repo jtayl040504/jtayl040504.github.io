@@ -69,3 +69,27 @@
 .dark-mode #form-status {
     color: #fff;
 }
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  margin: 15% auto;
+  border-radius: 8px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
