@@ -20,7 +20,7 @@ window.addEventListener("click", (event) => {
 });
 
 // Skills section
-const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Oracle SQL", "C"," Java"];
 const skillsListDiv = document.getElementById("skills-list");
 const skillsHeading = document.createElement("h3");
 skillsHeading.textContent = "My Skills:";
@@ -78,3 +78,29 @@ document.querySelector("form").addEventListener("submit", function (event) {
         statusDiv.style.color = "green";
     }, 2500);
 });
+// Funtion to create Project Objects
+function Project(title, description, icon, link) {
+    this.title = title;
+    this.description = description;
+    this.icon = icon;
+    this.link = link;
+}
+project1 = new Project("Oracle Database", "A personal database using Oracle to learn about database management.", "🌐", "https://github.com/jtayl040504/SDC250L.git");
+project2 = new Project("Java Calculator App", " This is a Java menu-driven calculator that handles singular and multiple inputs.", "🌐", "https://github.com/jtayl040504/Final_Project.git");
+project3 = new Project("C Calculator App", "This is a menu driven Calculator Application using C programming and Agile Teams.", "🌐", "https://github.com/jtayl040504/SDC255_Agile.git");
+const projects = [project1, project2, project3];
+const projectsDiv = document.getElementById("projects");
+projects.forEach(project => {
+    const projectCard = document.createElement("div");
+    projectCard.classList.add("project-card"); 
+    projectCard.innerHTML = `
+        <h4>${project.icon} <a href="${project.link}" target="_blank">${project.title}</a></h4>
+        <p>${project.description}</p>
+    `;
+    projectsDiv.appendChild(projectCard);
+});
+// Convert project array to JSON and store it in Session Storage
+sessionStorage.setItem("projectsData", JSON.stringify(projects));
+// Retrieve project data from Session Storage and parse it back to an object
+const storedProjects = JSON.parse(sessionStorage.getItem("projectsData"));
+console.log(storedProjects);

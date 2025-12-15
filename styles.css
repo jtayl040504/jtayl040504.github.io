@@ -93,3 +93,16 @@
   cursor: pointer;
   font-size: 20px;
 }
+.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+.dark-mode .close {
+    color: #ffffff;
+}
+
+.dark-mode .close:hover {
+    color: #ff6b6b;
+}
